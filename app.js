@@ -30,7 +30,8 @@ mongoose.set('useUnifiedTopology',true);
 // mongoose.connect("mongodb://localhost/manhattan3",{useNewUrlParser:true});
 mongoose.connect("mongodb+srv://review:yohoneysingh@1@cluster0-jhje6.mongodb.net/test?retryWrites=true&w=majority",{
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useUnifiedTopology:true
 
 });
 
