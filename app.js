@@ -14,7 +14,7 @@ var express         = require('express'),
      methodOverride = require("method-override"),
      passportLocalMongoose   =require("passport-local-mongoose");
 
-var app             = express();
+var app             = express()
 
 // ===================================Routes Require ===========================================================
 var campgroundsRoutes = require("./routes/campgrounds.js");
