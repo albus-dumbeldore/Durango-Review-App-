@@ -125,13 +125,19 @@ router.get("/login",(req,res)=>{
 router.post("/login",passport.authenticate("local",
     {
         successRedirect:"/campgrounds",
-        failureRedirect:"/login"
+        failureRedirect:"/login",
+        failureFlash:"Invalid Username or Password",
+        successFlash:"Successfully Login"
 
     }),(req,res)=>{
       // console.log(err.message)
       
 
 });
+
+// router.post('/login',
+//   passport.authenticate('local', { successRedirect: '/campgrounds',
+//                                    failureRedirect: '/login',failureFlash:"Invalid Username or Password",successFlash:"Successfully Login" }));
 
 // Logout
 router.get("/logout",(req,res)=>{
