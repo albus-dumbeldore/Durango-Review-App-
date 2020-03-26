@@ -19,7 +19,7 @@ var app             = express()
 // ===================================Routes Require ===========================================================
 var campgroundsRoutes = require("./routes/campgrounds.js");
 var commentRoutes     = require("./routes/comments.js");    
-var authRoutes        = require("./routes/auth.js");
+var authRoutes        = require("./routes/auth.js")
 // ====================================End=====================================================================
 
 
