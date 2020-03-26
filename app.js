@@ -31,6 +31,7 @@ var authRoutes        = require("./routes/auth.js");
 mongoose.connect("mongodb+srv://review:yohoneysingh@1@cluster0-jhje6.mongodb.net/test?retryWrites=true&w=majority",{
     useNewUrlParser: true,
     useUnifiedTopology:true
+    
 
 });
 
@@ -71,7 +72,7 @@ passport.deserializeUser(User.deserializeUser());
 // =========================Define currentUser to use in any ejs file in header file without passing into the object
 app.use(function(req,res,next){
     res.locals.currentUser = req.user;
-    res.locals.error     = req.flash("error");``
+    res.locals.error     = req.flash("error");
     res.locals.success   = req.flash("success");
     next();
 });
