@@ -65,11 +65,14 @@ router.post("/register",upload.single("image"),(req,res)=>{
         });
         User.register(newUser,req.body.password,(err,user)=>{
             if(err){
+                // console.log(err.message);
                 req.flash("error",err.message);
-                return res.render("register");
+                // return res.render("register");
+                return res.redirect("/register")
             }
             passport.authenticate("local")(req,res,()=>{
-                res.redirect("/campgrounds");
+                req.flash("success","Successfuly Registered")
+                return res.redirect("/campgrounds");
             });
         });
     }
@@ -80,6 +83,7 @@ router.post("/register",upload.single("image"),(req,res)=>{
                 req.flash("error",err.message);
                 return res.redirect("back");
             }
+            // req.flash("success","Successfuly Registered")
             console.log(result.secure_url);
             req.body.image = result.secure_url;
             req.body.imageId=result.public_id;
@@ -94,9 +98,11 @@ router.post("/register",upload.single("image"),(req,res)=>{
             });
             User.register(newUser,req.body.password,(err,user)=>{
                 if(err){
+                    // req.flash()
                     return res.render("register",{error:err.message});
                 }
                 passport.authenticate("local")(req,res,()=>{
+                    req.flash("success","Successfuly Registered")
                     res.redirect("/campgrounds");
                 });
             });
@@ -122,6 +128,8 @@ router.post("/login",passport.authenticate("local",
         failureRedirect:"/login"
 
     }),(req,res)=>{
+      // console.log(err.message)
+      
 
 });
 
@@ -129,7 +137,7 @@ router.post("/login",passport.authenticate("local",
 router.get("/logout",(req,res)=>{
     req.logout();
     req.flash("success","Logged You Out");
-    res.redirect("/campgrounds");
+    res.redirect("/login");
 });
 
 
@@ -224,7 +232,8 @@ router.delete("/users/:user_id",middleware.checkProfileOwnership,(req,res)=>{
       }
       if(user.image === ""){
         user.remove();
-        res.redirect("/");
+        req.flash("success","Account Deleted")
+        return res.redirect("/login");
       }
       cloudinary.v2.uploader.destroy(user.imageId,(err)=>{
         // if(err){
