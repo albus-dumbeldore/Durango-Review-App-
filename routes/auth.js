@@ -199,6 +199,7 @@ router.put("/users/:user_id",upload.single("image"),(req,res)=>{
     //   console.log("ha aya hu lode");
     // }
     // console.log(req.body);
+    // console.log(user.image)
     if(req.file){
       cloudinary.v2.uploader.destroy(user.imageId,(err,result)=>{
         if(err){
@@ -213,6 +214,10 @@ router.put("/users/:user_id",upload.single("image"),(req,res)=>{
           }
           user.imageId=result.public_id;
           user.image  = result.secure_url;
+          // console.log(user.image)
+          // console.log("second  +  " + user.image)
+          // user.save();
+          // res.redirect("/users/"+req.params.user_id);
           
 
         });
@@ -220,6 +225,7 @@ router.put("/users/:user_id",upload.single("image"),(req,res)=>{
 
     }
     user.save();
+    // console.log("first  +  " + user.image)
     req.flash("success","Updated your profile");  
     res.redirect("/users/"+req.params.user_id);
 
