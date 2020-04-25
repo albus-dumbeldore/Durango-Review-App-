@@ -3,7 +3,7 @@ require('dotenv').config();
 
 var express         = require('express'),
      flash          = require("connect-flash"), 
-     bodyParser     =require("body-parser"),
+     bodyParser     = require("body-parser"),
      mongoose       = require("mongoose"),
      Campground     = require("./models/campground.js"),
      seedDB         = require("./seed.js"),
@@ -13,8 +13,11 @@ var express         = require('express'),
      User           = require("./models/user"),
      methodOverride = require("method-override"),
      passportLocalMongoose   =require("passport-local-mongoose");
+     http           = require('http')
 
 var app             = express()
+var server          = http.createServer(app)
+var port            = process.env.PORT || 3000
 
 // ===================================Routes Require ===========================================================
 var campgroundsRoutes = require("./routes/campgrounds.js");
@@ -38,7 +41,7 @@ mongoose.connect("mongodb+srv://review:yohoneysingh@1@cluster0-jhje6.mongodb.net
 
 //============================================================================================================     
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));	
 app.use(methodOverride("_method"));
 app.use(flash());
 app.locals.moment = require("moment");
@@ -90,7 +93,11 @@ app.use(commentRoutes);
 // ===========================================================================================================
 
 
-app.listen(process.env.PORT || 3000)
+// app.listen(process.env.PORT || 3000)
 // app.listen(3000,()=>{
 //     console.log("port http://localhost:3000");
 // });
+
+server.listen(port,()=>{
+    console.log('Server is on port ' + 3000) 
+})
