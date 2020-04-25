@@ -31,7 +31,12 @@ var authRoutes        = require("./routes/auth.js")
 // mongoose.set('useNewUrlParser', true);
 // mongoose.set('useUnifiedTopology',true);
 // mongoose.connect("mongodb://localhost/manhattan4",{useNewUrlParser:true});
+mongoose.connect("mongodb+srv://review:yohoneysingh@1@cluster0-jhje6.mongodb.net/test?retryWrites=true&w=majority",{
+    useNewUrlParser: true,
+    useUnifiedTopology:true
+    
 
+});
 
 
 //============================================================================================================     
